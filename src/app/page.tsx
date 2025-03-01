@@ -1,6 +1,6 @@
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <h1>Task Tracker home page</h1>
+    <h1>Task Tracker Home</h1>
   );
 }
