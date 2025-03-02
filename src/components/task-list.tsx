@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Task } from "@/types/task-types";
 import Modal from "./modal";
 import TaskInput from "./task-input";
@@ -20,6 +20,7 @@ const TaskList: React.FC<TaskListProps> = ({
   const [taskList, setTaskList] = useState<Task[]>(tasks);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteTaskId, setDeleteTaskId] = useState(0);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const TaskList: React.FC<TaskListProps> = ({
       <div>
         <div className="sm:px-6 w-full">
           <div className="px-4 md:px-10 py-4 md:py-7">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center">
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
                 Tasks
               </p>
@@ -142,13 +143,16 @@ const TaskList: React.FC<TaskListProps> = ({
                   <tbody>
                     {taskList &&
                       taskList.map((task) => (
-                        <>
-                          <tr className="h-16 border border-gray-100 rounded">
+                        <Fragment key={task.id}>
+                          <tr
+                            className={`h-16 border border-gray-100 rounded
+                            ${task.completed ? "bg-green-100" : "bg-red-100"}`}
+                          >
                             <td className="w-1/12">
                               <div className="ml-5">
                                 <input
                                   type="checkbox"
-                                  className="checkbox cursor-pointer w-full h-full"
+                                  className="checkbox cursor-pointer w-5 h-5 accent-green-500 hover:accent-green-300"
                                   onChange={() => toggleTaskCompletion(task.id)}
                                   checked={task.completed}
                                 />
@@ -169,7 +173,10 @@ const TaskList: React.FC<TaskListProps> = ({
                                 strokeWidth={1.5}
                                 stroke="currentColor"
                                 className="size-5 cursor-pointer"
-                                onClick={() => setShowDeleteModal(true)}
+                                onClick={() => {
+                                  setDeleteTaskId(task.id);
+                                  setShowDeleteModal(true);
+                                }}
                               >
                                 <path
                                   strokeLinecap="round"
@@ -180,7 +187,7 @@ const TaskList: React.FC<TaskListProps> = ({
                             </td>
                           </tr>
                           <tr className="h-3" />
-                        </>
+                        </Fragment>
                       ))}
                   </tbody>
                 </table>
@@ -195,7 +202,7 @@ const TaskList: React.FC<TaskListProps> = ({
           setShowTaskModal(false);
         }}
       >
-        <TaskInput addTask={addTask} />
+        <TaskInput addTask={addTask} onSaved={() => setShowTaskModal(false)} />
       </Modal>
       <Modal
         isOpen={showDeleteModal}
@@ -204,7 +211,10 @@ const TaskList: React.FC<TaskListProps> = ({
         }}
       >
         <DeleteWarning
-          onDelete={() => console.log("delete")}
+          onDelete={() => {
+            updateTasks(taskList.filter((task) => task.id !== deleteTaskId));
+            setShowDeleteModal(false);
+          }}
           onCancel={() => setShowDeleteModal(false)}
         />
       </Modal>

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 interface TaskInputProps {
   addTask: (taskText: string) => void;
+  onSaved?: () => void;
 }
 
-const TaskInput: React.FC<TaskInputProps> = ({ addTask }) => {
+const TaskInput: React.FC<TaskInputProps> = ({ addTask, onSaved }) => {
   const [taskText, setTaskText] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -12,6 +13,7 @@ const TaskInput: React.FC<TaskInputProps> = ({ addTask }) => {
     if (taskText.trim()) {
       addTask(taskText);
       setTaskText("");
+      if (onSaved) onSaved();
     }
   };
 
@@ -38,7 +40,8 @@ const TaskInput: React.FC<TaskInputProps> = ({ addTask }) => {
 
       <button
         type="submit"
-        className="cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none disabled:bg-indigo-300 sm:w-auto dark:disabled:bg-indigo-800 dark:disabled:text-indigo-400"
+        disabled={!taskText.trim()}
+        className="cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none disabled:bg-indigo-300 disabled:cursor-default"
       >
         Save
       </button>
