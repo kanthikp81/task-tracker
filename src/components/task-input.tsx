@@ -24,7 +24,7 @@ const TaskInput: React.FC<TaskInputProps> = ({ addTask, onSaved }) => {
           htmlFor="new-task"
           className="block text-sm/6 font-medium text-gray-900"
         >
-          Add New Task
+          Add a New Task
         </label>
         <div className="mt-2 mb-2">
           <textarea
