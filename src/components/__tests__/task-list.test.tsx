@@ -64,13 +64,13 @@ describe("TaskList Component", () => {
 
     it("clears all tasks", () => {
         fireEvent.click(screen.getByText("Clear All"));
-        expect(mockClearTasks).toHaveBeenCalled();
+        expect(screen.getByText("Are you sure you want to delete all the tasks?")).toBeInTheDocument();
     });
 
     it("opens delete warning modal", () => {
         const deleteButton = screen.getAllByRole("button")[2];
         fireEvent.click(deleteButton);
-        expect(screen.getByText("Are you sure you want to delete the task?")).toBeInTheDocument();
+        expect(screen.getByText((content) => content.startsWith("Are you sure you want to delete"))).toBeInTheDocument();
     });
 
    

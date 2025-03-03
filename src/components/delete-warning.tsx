@@ -3,16 +3,19 @@ import React from "react";
 interface DeleteWarningProps {
   onDelete: () => void;
   onCancel: () => void;
+  clearAll?:boolean
 }
 
 const DeleteWarning: React.FC<DeleteWarningProps> = ({
   onDelete,
   onCancel,
+  clearAll
 }) => {
   return (
     <div className="flex flex-col">
       <p className="m-2  items-center">
-        Are you sure you want to delete the task?
+      {clearAll ? "Are you sure you want to delete all the tasks?" 
+                : "Are you sure you want to delete the task?"}
       </p>
       <div className="flex flex-row justify-end mt-2">
         <button

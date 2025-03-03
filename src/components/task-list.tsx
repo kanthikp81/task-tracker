@@ -121,8 +121,9 @@ const TaskList: React.FC<TaskListProps> = ({
                   </p>
                 </button>
                 <button
-                  onClick={clearTasks}
-                  className="m-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
+                  disabled={taskList.length === 0}
+                  onClick={() => {setShowDeleteModal(true);}}
+                  className="m-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded disabled:opacity-50"
                 >
                   <p className="text-sm font-medium leading-none text-white">
                     Clear All
@@ -211,8 +212,15 @@ const TaskList: React.FC<TaskListProps> = ({
         }}
       >
         <DeleteWarning
+        clearAll={deleteTaskId === 0}
           onDelete={() => {
-            updateTasks(taskList.filter((task) => task.id !== deleteTaskId));
+            if(deleteTaskId === 0) {
+              clearTasks();
+            }
+            else {
+                updateTasks(taskList.filter((task) => task.id !== deleteTaskId));
+                setDeleteTaskId(0);
+              }
             setShowDeleteModal(false);
           }}
           onCancel={() => setShowDeleteModal(false)}
