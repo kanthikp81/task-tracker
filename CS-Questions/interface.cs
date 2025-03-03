@@ -14,15 +14,21 @@
 *If Yes (Incorrect Answer), Why?*
 *If No, Is there any way to Improve design of this interface?*
 */
-
-// Answer: Added the return types for the interface methods.
-interface StudentRegistrationAdmission
+/*
+* Answer: 
+*	The interface design is incorrect because the methods do not have return types.
+* 	The interface design can be improved by adding return types to the methods.
+* 	The name of the Interface and methods can also be corrected for consistency.
+* The corrected interface is as follows:
+*/
+interface IStudentRegistrationAdmission
 {
-	void RegisterStudent();
-	void InitiateAdmissionProcedure();
-	decimal CalculateFees();
-	void PayFees();
-	void SendRegistrationDetailsSms();
-	void SendEmailToStudent();
-	void SendPaymentReceiptOnEmail();
+	void registerStudent();
+	void initiateAdmissionProcedure();
+	decimal calculateFees();
+	void payFees();
+	void sendRegistrationDetailsSms();
+	void sendEmailToStudent();
+	void sendPaymentReceiptOnEmail();
 }
+
