@@ -20,6 +20,7 @@ const useLocalStorage = ({key, initialValue}:LocalStorageHookProps) => {
   })
 
   const setValue = (value:Task[]) => {
+
     try {
       // If the passed value is a callback function,
       //  then call it with the existing state.

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import TaskList from "../task-list";
+import TaskHome from "../task-home";
 import { Task } from "@/types/task-types";
 
 const tasks: Task[] = [
@@ -15,7 +15,7 @@ const mockUpdateTasks = jest.fn();
 describe("TaskList Component", () => {
     beforeEach(() => {
         render(
-            <TaskList
+            <TaskHome
                 tasks={tasks}
                 clearTasks={mockClearTasks}
                 addTask={mockAddTask}

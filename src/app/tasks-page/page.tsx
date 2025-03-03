@@ -1,5 +1,5 @@
 "use client";
-import TaskList from "@/components/task-list";
+import TaskHome from "@/components/task-home";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { Task } from "@/types/task-types";
 
@@ -24,7 +24,7 @@ export default function TasksPage() {
 
   return (
     <div>
-      <TaskList
+      <TaskHome
         tasks={value}
         addTask={addTask}
         clearTasks={clearTasks}
