@@ -1,5 +1,5 @@
 "use client";
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import { Task } from "@/types/task-types";
 import TaskFilters from "./task-filters";
 import TaskActions from "./task-actions";
@@ -24,6 +24,11 @@ const TaskHome: React.FC<TaskHomeProps> = ({
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteTaskId, setDeleteTaskId] = useState(0);
   const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    setTaskList(tasks);
+  }
+  , [tasks]);
 
   const filterTasks = (filter: string) => {
     if (filter === "all") {

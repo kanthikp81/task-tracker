@@ -39,8 +39,8 @@ const TaskList: React.FC<TaskListProps> = ({ taskList, filter, toggleTaskComplet
                                             </div>
                                         </td>
                                         <td className="">
-                                            <div className="flex items-center pl-5">
-                                                <p className="text-base font-medium leading-none text-gray-700 mr-2">
+                                            <div className="flex items-center pl-5 m-1">
+                                                <p className="text-base text-wrap font-medium leading-none text-gray-700 mr-2">
                                                     {task.title}
                                                 </p>
                                             </div>
