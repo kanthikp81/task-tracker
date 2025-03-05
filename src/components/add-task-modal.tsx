@@ -4,11 +4,11 @@ import TaskInput from './task-input';
 
 interface AddTaskModalProps {
     isOpen: boolean;
-    setShowTaskModal: (show: boolean) => void;
+    onClose: () => void;
     addTask: (task: string) => void;
 }
 
-const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, setShowTaskModal, addTask }) => {
+const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, addTask }) => {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         if (isOpen && inputRef.current) {
@@ -21,9 +21,9 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, setShowTaskModal, a
     return (
         <Modal
             isOpen={isOpen}
-            onClose={() => setShowTaskModal(false)}
+            onClose={onClose}
         >
-            <TaskInput addTask={addTask} onSaved={() => setShowTaskModal(false)} inputRef={inputRef} />
+            <TaskInput addTask={addTask} onSave={onClose} inputRef={inputRef} />
         </Modal>
     );
 };

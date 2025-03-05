@@ -19,7 +19,7 @@ const TaskHome: React.FC<TaskHomeProps> = ({
   addTask,
   updateTasks,
 }) => {
-  const [taskList, setTaskList] = useState<Task[]>(tasks);
+  const [taskList, setTaskList] = useState<Task[]>([]);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteTaskId, setDeleteTaskId] = useState(0);
@@ -47,6 +47,15 @@ const TaskHome: React.FC<TaskHomeProps> = ({
     setTaskList(updatedTaskList);
     updateTasks(updatedTaskList);
   };
+  const onDelete = () => {
+    if (deleteTaskId === 0) {
+        clearTasks();
+    } else {
+        updateTasks(taskList.filter((task) => task.id !== deleteTaskId));
+        setDeleteTaskId(0);
+    }
+    setShowDeleteModal(false);
+};
 
   return (
     <>
@@ -75,15 +84,12 @@ const TaskHome: React.FC<TaskHomeProps> = ({
           </div>
         </div>
       </div>
-      <AddTaskModal isOpen={showTaskModal} setShowTaskModal={setShowTaskModal} addTask={addTask} />
+      <AddTaskModal isOpen={showTaskModal} onClose={()=>setShowTaskModal(false)} addTask={addTask} />
       <DeleteTaskModal 
        isOpen={showDeleteModal}
-       setShowDeleteModal={setShowDeleteModal}
-       updateTasks={updateTasks}
-       taskList={taskList}
        deleteTaskId={deleteTaskId}
-       setDeleteTaskId={setDeleteTaskId}
-       clearTasks={clearTasks}
+       onDelete={onDelete}
+       onCancel={()=>setShowDeleteModal(false)}
        />
 
     </>
