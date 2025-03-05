@@ -2,17 +2,15 @@ import React from 'react';
 
 interface TaskFiltersProps {
     filter: string;
-    setFilter: (status: string) => void;
-    filterTasks: (status: string) => void;
+    onFilterChange: (filter: string) => void;
 }
 
-const TaskFilters: React.FC<TaskFiltersProps> = ({ filter, setFilter, filterTasks }) => {
+const TaskFilters: React.FC<TaskFiltersProps> = ({ filter, onFilterChange }) => {
     return (
         <div className="flex items-center">
             <a
                 onClick={() => {
-                setFilter("all");
-                filterTasks("all");
+                    onFilterChange("all");
                 }}
             >
                 <div
@@ -28,8 +26,7 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ filter, setFilter, filterTask
             </a>
             <a
                 onClick={() => {
-                setFilter("completed");
-                filterTasks("completed");
+                onFilterChange("completed");
                 }}
             >
                 <div
@@ -45,8 +42,7 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ filter, setFilter, filterTask
             </a>
             <a
                 onClick={() => {
-                setFilter("pending");
-                filterTasks("pending");
+                    onFilterChange("pending");
                 }}
             >
                 <div

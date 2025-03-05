@@ -70,16 +70,16 @@ const TaskHome: React.FC<TaskHomeProps> = ({
           </div>
           <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
             <div className="sm:flex items-center justify-between">
-              <TaskFilters filter={filter} setFilter={setFilter} filterTasks={filterTasks} />
-              <TaskActions setShowTaskModal={setShowTaskModal} setShowDeleteModal={setShowDeleteModal} clearAll={taskList.length !== 0} />
+              <TaskFilters filter={filter} 
+                onFilterChange={(newFilter)=>{ setFilter(newFilter); filterTasks(newFilter);}}  />
+              <TaskActions onAddTask={()=>setShowTaskModal(true)} onClearAll={()=>setShowDeleteModal(true)} clearAll={taskList.length !== 0} />
             </div>
             
             <TaskList 
             taskList={filterTasks(filter)}  
             filter={filter}
             toggleTaskCompletion={toggleTaskCompletion}
-            setDeleteTaskId={setDeleteTaskId}
-            setShowDeleteModal={setShowDeleteModal}
+            onDeleteTask={(id)=>{setDeleteTaskId(id); setShowDeleteModal(true);}}
             />
           </div>
         </div>

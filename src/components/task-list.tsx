@@ -5,11 +5,10 @@ interface TaskListProps {
     taskList: Task[];
     filter: string;
     toggleTaskCompletion: (id: number) => void;
-    setDeleteTaskId: (id: number) => void;
-    setShowDeleteModal: (show: boolean) => void;
+    onDeleteTask: (id: number) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ taskList, filter, toggleTaskCompletion, setDeleteTaskId, setShowDeleteModal }) => {
+const TaskList: React.FC<TaskListProps> = ({ taskList, filter, toggleTaskCompletion, onDeleteTask }) => {
     return (
         <div className="mt-7 overflow-x-auto">
             {taskList && taskList.length === 0 ? (
@@ -54,8 +53,7 @@ const TaskList: React.FC<TaskListProps> = ({ taskList, filter, toggleTaskComplet
                                                 stroke="currentColor"
                                                 className="size-5 cursor-pointer"
                                                 onClick={() => {
-                                                    setDeleteTaskId(task.id);
-                                                    setShowDeleteModal(true);
+                                                    onDeleteTask(task.id);
                                                 }}
                                             >
                                                 <path
