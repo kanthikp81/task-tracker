@@ -13,7 +13,7 @@ const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({
     deleteTaskId,
     onCancel,
     onDelete,
-    
+
 }) => {
 
     return (

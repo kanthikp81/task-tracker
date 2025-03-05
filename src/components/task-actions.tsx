@@ -3,7 +3,7 @@ import React from 'react';
 interface TaskActionsProps {
     clearAll: boolean;
     onClearAll: () => void;
-    onAddTask:() => void;
+    onAddTask: () => void;
 }
 
 const TaskActions: React.FC<TaskActionsProps> = ({ onAddTask, onClearAll, clearAll }) => {

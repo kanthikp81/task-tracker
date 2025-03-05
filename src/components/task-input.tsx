@@ -3,7 +3,7 @@ import React, { useState } from "react";
 interface TaskInputProps {
   addTask: (taskText: string) => void;
   onSave: () => void;
-  inputRef: React.RefObject<HTMLTextAreaElement|null>;
+  inputRef: React.RefObject<HTMLTextAreaElement | null>;
 }
 
 const TaskInput: React.FC<TaskInputProps> = ({ addTask, onSave, inputRef }) => {
@@ -29,7 +29,7 @@ const TaskInput: React.FC<TaskInputProps> = ({ addTask, onSave, inputRef }) => {
         </label>
         <div className="mt-2 mb-2">
           <textarea
-            ref={inputRef}  
+            ref={inputRef}
             autoFocus
             tabIndex={11}
             name="new-task"

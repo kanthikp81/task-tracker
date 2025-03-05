@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Task } from "@/types/task-types";
 import TaskFilters from "./task-filters";
 import TaskActions from "./task-actions";
@@ -28,7 +28,7 @@ const TaskHome: React.FC<TaskHomeProps> = ({
   useEffect(() => {
     setTaskList(tasks);
   }
-  , [tasks]);
+    , [tasks]);
 
   const filterTasks = (filter: string) => {
     if (filter === "all") {
@@ -49,13 +49,13 @@ const TaskHome: React.FC<TaskHomeProps> = ({
   };
   const onDelete = () => {
     if (deleteTaskId === 0) {
-        clearTasks();
+      clearTasks();
     } else {
-        updateTasks(taskList.filter((task) => task.id !== deleteTaskId));
-        setDeleteTaskId(0);
+      updateTasks(taskList.filter((task) => task.id !== deleteTaskId));
+      setDeleteTaskId(0);
     }
     setShowDeleteModal(false);
-};
+  };
 
   return (
     <>
@@ -70,27 +70,28 @@ const TaskHome: React.FC<TaskHomeProps> = ({
           </div>
           <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
             <div className="sm:flex items-center justify-between">
-              <TaskFilters filter={filter} 
-                onFilterChange={(newFilter)=>{ setFilter(newFilter); filterTasks(newFilter);}}  />
-              <TaskActions onAddTask={()=>setShowTaskModal(true)} onClearAll={()=>setShowDeleteModal(true)} clearAll={taskList.length !== 0} />
+              <TaskFilters
+                filter={filter}
+                onFilterChange={(newFilter) => { setFilter(newFilter); filterTasks(newFilter); }} />
+              <TaskActions onAddTask={() => setShowTaskModal(true)} onClearAll={() => setShowDeleteModal(true)} clearAll={taskList.length !== 0} />
             </div>
-            
-            <TaskList 
-            taskList={filterTasks(filter)}  
-            filter={filter}
-            toggleTaskCompletion={toggleTaskCompletion}
-            onDeleteTask={(id)=>{setDeleteTaskId(id); setShowDeleteModal(true);}}
+
+            <TaskList
+              taskList={filterTasks(filter)}
+              filter={filter}
+              toggleTaskCompletion={toggleTaskCompletion}
+              onDeleteTask={(id) => { setDeleteTaskId(id); setShowDeleteModal(true); }}
             />
           </div>
         </div>
       </div>
-      <AddTaskModal isOpen={showTaskModal} onClose={()=>setShowTaskModal(false)} addTask={addTask} />
-      <DeleteTaskModal 
-       isOpen={showDeleteModal}
-       deleteTaskId={deleteTaskId}
-       onDelete={onDelete}
-       onCancel={()=>setShowDeleteModal(false)}
-       />
+      <AddTaskModal isOpen={showTaskModal} onClose={() => setShowTaskModal(false)} addTask={addTask} />
+      <DeleteTaskModal
+        isOpen={showDeleteModal}
+        deleteTaskId={deleteTaskId}
+        onDelete={onDelete}
+        onCancel={() => setShowDeleteModal(false)}
+      />
 
     </>
   );
